@@ -17,31 +17,31 @@ const pokemon = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
   "Dragonair", "Dragonite", "Mewtwo", "Mew"
 ];
 
-// DECLARE VARIABLES HERE
+// DECLARE GLOBAL VARIABLES HERE
 let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-abc += abc.toLowerCase();
+  abc += abc.toLowerCase();
 let seconds = 60;
 let score = 0;
 let pokemonCaught = [];
-let randomNum, currPokemon, userWord, pokeUrlName, spriteURL, pokeNationalDexId;
+let currPokemon, userWord, spriteURL, pokeNationalDexId;
 
 
 // GENERATES A NEW POKEMON
 function newPokemon() {
 
   // UPDATE SCORE TEXT
-  $(".score").text("Score: " + score);
+  $(".score").text("Caught: " + score);
 
   // CLEAR USER'S TYPED INPUT
   userWord = "";
   $(".user-type").text(userWord);
 
   // SELECT NEW POKEMON WITH RANDOM NUMBER
-  randomNum = Math.floor(Math.random() * 151);
+  let randomNum = Math.floor(Math.random() * 151);
   currPokemon = pokemon[randomNum];
 
   // UPDATE THE POKEMON NAME DISPLAYED
-  $(".currPokemon").text(currPokemon);
+  $(".curr-pokemon").text(currPokemon);
 
   // USES THE RANDOMNUM TO MAKE THE POKEMON'S NATIONALDEX ID NUMBER AS A STR
   if (randomNum < 99) {
@@ -50,7 +50,9 @@ function newPokemon() {
     pokeNationalDexId = String(randomNum + 1);
   }
 
-  // GENERATE SPRITE BASED ON NEW POKEMON
+  // GENERATE SPRITE URL BASED ON NEW POKEMON
+  let pokeUrlName;
+
   if (pokeNationalDexId === "029") {
     pokeUrlName = "nidoran_f";
   } else if (pokeNationalDexId === "032") {
@@ -141,12 +143,13 @@ function timer() {
 function gameover() {
 
   $(document).off("keydown");
-  $(".results").css("display", "inline-block");
+  $(".results-container").css("display", "inline-block");
+  $(".result-score").html("Congratulations, you caught " + score + " Pokemon!<br>")
   let audio = new Audio("/sounds/gameover.wav");
   audio.play();
 
   pokemonCaught.forEach(function(pokemonSpriteURL) {
-    $(".results").after("<img src='" + pokemonSpriteURL + "'>");
+    $(".result-score").append("<img src='" + pokemonSpriteURL + "'>");
   });
 }
 

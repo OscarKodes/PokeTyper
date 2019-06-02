@@ -1,12 +1,27 @@
 <%- include("partials/header") -%>
 
-<h1>PokeType</h1>
-<h2>catch pokemon by typing their names</h2>
+<div class="top-container">
+  <h1 class="big-text">Catch Pokemon by typing</h1>
+  <button class="btn btn-secondary btn-large" type="button">
+    <a href="/gameplay">Play Game</a>
+  </button>
+</div>
 
 
-<button class="btn btn-primary btn-large" type="button">
-  <a href="/gameplay">Start Game</a>
-</button>
+
+<div class="rules-container">
+  <p class="rules-title"><strong>Rules:</strong></p>
+
+  <ul class="rules-ul">
+    <li>Type and enter the Pokemon's name to capture it!</li>
+    <li>Entering a name with typos will not work.</li>
+    <li>Uppercase and lowercase letters matter.</li>
+    <li>Catch as many as you can in 60 seconds!</li>
+  </ul>
+</div>
+
+
+
 
 
 <%- include("partials/footer") -%>

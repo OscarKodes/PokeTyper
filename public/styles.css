@@ -1,6 +1,10 @@
 body {
-  background-color: powderblue;
-  color: black;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  background-color: #ACCB95;
+
 }
 
 a {
@@ -13,14 +17,109 @@ a:hover {
   text-decoration: none;
 }
 
-.results {
-  font-size: 10rem;
-  color: white;
-  background-color: darkgrey;
+.brand {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+.navbar-color {
+  background-color: #57BBF6;
+}
+
+.navbar-right-align {
+  text-align: right;
+}
+
+.top-container {
+  background-color: #ACCB95;
+  text-align: center;
+  padding: 10rem 6rem 10rem 6rem;
+}
+
+.big-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 6rem;
+  margin-bottom: 4rem;
+}
+
+.rules-container{
+  background-color: white;
+  color: #3E83AC;
+  padding: 3rem;
+  text-align: center;
+  padding: 6rem 0;
+}
+
+.rules-title {
+  font-size: 2.5rem;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.rules-ul {
+  font-size: 1.8rem;
+  line-height: 2;
+  display: inline-block;
+  text-align: left;
+}
+
+.results-container {
   display: none;
+  text-align: center;
+}
+
+.results {
+  font-size: 2rem;
+  color: white;
+  background-color: #3E83AC;
   position: absolute;
   top: 15rem;
   right: 30rem;
   height: 35rem;
-  margin: 10px auto;
+  border-radius: 50px;
+  padding: 4rem;
+}
+
+.footer {
+  background-color: #8E9E69;
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.user-input-box {
+  text-align: center;
+  margin: 0 4rem 7rem;
+  padding: 2rem 0 7rem;
+  background-color: white;
+  height: 5rem;
+  border-radius: 100px;
+}
+
+.user-type {
+  font-size: 5rem;
+  color: black;
+}
+
+.game-counters {
+  text-align: center;
+  padding: 6rem 3rem 3rem 3rem;
+}
+
+.curr-pokemon {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.sprite-container {
+  width: 200px;
+  height: 200px;
+  padding-top: 2rem;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.sprite {
+  display: inline-block;
 }
