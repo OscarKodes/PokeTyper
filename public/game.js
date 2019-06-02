@@ -23,7 +23,7 @@ abc += abc.toLowerCase();
 let seconds = 60;
 let score = 0;
 let pokemonCaught = [];
-let randomNum, currPokemon, userWord, pokeUrlName, spriteURL;
+let randomNum, currPokemon, userWord, pokeUrlName, spriteURL, pokeNationalDexId;
 
 
 // GENERATES A NEW POKEMON
@@ -37,17 +37,23 @@ function newPokemon() {
   $(".user-type").text(userWord);
 
   // SELECT NEW POKEMON WITH RANDOM NUMBER
-  // randomNum = Math.floor(Math.random() * 151);
-  randomNum = 31;
+  randomNum = Math.floor(Math.random() * 151);
   currPokemon = pokemon[randomNum];
 
   // UPDATE THE POKEMON NAME DISPLAYED
   $(".currPokemon").text(currPokemon);
 
+  // USES THE RANDOMNUM TO MAKE THE POKEMON'S NATIONALDEX ID NUMBER AS A STR
+  if (randomNum < 99) {
+    pokeNationalDexId = (randomNum + 1) < 10 ? "00" + String(randomNum + 1) : "0" + String(randomNum + 1);
+  } else {
+    pokeNationalDexId = String(randomNum + 1);
+  }
+
   // GENERATE SPRITE BASED ON NEW POKEMON
-  if (randomNum + 1 === 29) {
+  if (pokeNationalDexId === "029") {
     pokeUrlName = "nidoran_f";
-  } else if (randomNum + 1 === 32) {
+  } else if (pokeNationalDexId === "032") {
     pokeUrlName = "nidoran_m";
   } else {
     pokeUrlName = currPokemon.toLowerCase();
@@ -59,49 +65,66 @@ function newPokemon() {
   $(".sprite").attr("src", spriteURL);
 }
 
+// CREATE LISTENER FOR USER KEYBOARD INPUT
 $(document).on("keydown", function(event) {
   let pressedKey = event.key;
 
+  // IF THE TYPED KEY WAS A LETTER, RECORD IT
   if (abc.includes(pressedKey)) {
-
     userWord += pressedKey;
     $(".user-type").text(userWord);
-  } else if (pressedKey === "Shift") {} else if (pressedKey === "Enter") {
+  }
+
+  // IF SHIFT, DO NOTHING (THIS IS INTENTIONALLY LEFT EMPTY)
+  else if (pressedKey === "Shift") {}
+
+  // IF ENTER, WE CHECK THE ENTIRE WORD
+  else if (pressedKey === "Enter") {
     checkWord();
-  } else if (pressedKey === "Backspace" || "Delete") {
+  }
+
+  // BACKSPACE FUNCTIONALITY
+  else if (pressedKey === "Backspace" || "Delete") {
     userWord = userWord.slice(0, -1);
     $(".user-type").text(userWord);
   };
 });
 
+// CHECK THE USER'S ENTERED INPUT
 function checkWord() {
+
+  // IF CORRECT MATCH, UPDATE SCORE, POKEMON CAUGHT
+  // PLAY CRY, AND GENERATE NEW POKEMON
   if (userWord === currPokemon) {
     score++;
     pokemonCaught.push(spriteURL);
     cry();
     newPokemon();
-  } else {
+  }
+
+  // IF INCORRECT, PLAY AUDIO, CLEAR USER CACHE, UPDATE USER TEXT ON SCREEN
+  else {
+    let audio = new Audio ("/sounds/wrong.mp3");
+    audio.play();
     userWord = "";
     $(".user-type").text(userWord);
   }
 }
 
+// PLAYS CURRENT POKEMON'S CRY AUDIO
 function cry() {
-  let pokeNum;
 
-  if (randomNum < 99) {
-    pokeNum = (randomNum + 1) < 10 ? "00" + String(randomNum + 1) : "0" + String(randomNum + 1);
-  } else {
-    pokeNum = String(randomNum + 1);
-  }
-
-  let audio = new Audio("/sounds/" + pokeNum + " - " + currPokemon + ".wav");
+  let audio = new Audio("/sounds/" + pokeNationalDexId + " - " + currPokemon + ".wav");
   audio.play();
 }
 
+// KEEPS TRACK OF THE TIME
 function timer() {
+
+  // UPDATE SECONDS TEXT FOR USER TO SEE
   $(".timer").text("Time: " + seconds);
 
+  // EVERY SECOND, UPDATE TIME AND CHECK IF TIME'S UP
   setTimeout(function() {
     if (seconds > 0) {
       seconds--;
@@ -113,17 +136,18 @@ function timer() {
   }, 1000);
 }
 
+// ONCE TIME'S UP, REMOVE KEY LISTENERS, SHOW PLAYER RESULTS,
+// PLAY SOUND, SHOW ALL POKEMON CAUGHT
 function gameover() {
-  let audio = new Audio("/sounds/gameover.mp3");
-  audio.play();
-  $(".results").css("display", "inline-block");
-
-  pokemonCaught.forEach(function(pokemonSpriteURL) {
-
-    $(".results").after("<img src='" + pokemonSpriteURL + "'>");
-  });
 
   $(document).off("keydown");
+  $(".results").css("display", "inline-block");
+  let audio = new Audio("/sounds/gameover.wav");
+  audio.play();
+
+  pokemonCaught.forEach(function(pokemonSpriteURL) {
+    $(".results").after("<img src='" + pokemonSpriteURL + "'>");
+  });
 }
 
 newPokemon();
