@@ -1,3 +1,26 @@
-h1 {
-  color: purple;
+body {
+  background-color: powderblue;
+  color: black;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.results {
+  font-size: 10rem;
+  color: white;
+  background-color: darkgrey;
+  display: none;
+  position: absolute;
+  top: 15rem;
+  right: 30rem;
+  height: 35rem;
+  margin: 10px auto;
 }
