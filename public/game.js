@@ -23,6 +23,7 @@ let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let seconds = 60;
 let score = 0;
 let pokemonCaught = [];
+let gameOver = false;
 let currPokemon, userWord, spriteURL, pokeNationalDexId;
 
 
@@ -57,6 +58,8 @@ function newPokemon() {
     pokeUrlName = "nidoran_f";
   } else if (pokeNationalDexId === "032") {
     pokeUrlName = "nidoran_m";
+  } else if (pokeNationalDexId === "122") {
+    pokeUrlName = "mr._mime";
   } else {
     pokeUrlName = currPokemon.toLowerCase();
   }
@@ -68,28 +71,29 @@ function newPokemon() {
 }
 
 // CREATE LISTENER FOR USER KEYBOARD INPUT
-$(document).on("keydown", function(event) {
+$("body").on("keydown", function(event) {
   let pressedKey = event.key;
 
-  // IF THE TYPED KEY WAS A LETTER, RECORD IT
-  if (abc.includes(pressedKey)) {
-    userWord += pressedKey;
-    $(".user-type").text(userWord);
+  // CHECK IF GAME IS OVER OR NOT, OFF() DOESN'T SEEM TO TURN OFF LISTENERS
+  if (!gameOver) {
+
+    // IF THE TYPED KEY WAS A LETTER, RECORD IT
+    if (abc.includes(pressedKey)) {
+      userWord += pressedKey;
+      $(".user-type").text(userWord);
+    }
+
+    // IF ENTER, WE CHECK THE ENTIRE WORD
+    else if (pressedKey === "Enter") {
+      checkWord();
+    }
+
+    // BACKSPACE FUNCTIONALITY
+    else if (pressedKey === "Backspace" || pressedKey === "Delete") {
+      userWord = userWord.slice(0, -1);
+      $(".user-type").text(userWord);
+    };
   }
-
-  // IF SHIFT, DO NOTHING (THIS IS INTENTIONALLY LEFT EMPTY)
-  else if (pressedKey === "Shift") {}
-
-  // IF ENTER, WE CHECK THE ENTIRE WORD
-  else if (pressedKey === "Enter") {
-    checkWord();
-  }
-
-  // BACKSPACE FUNCTIONALITY
-  else if (pressedKey === "Backspace" || "Delete") {
-    userWord = userWord.slice(0, -1);
-    $(".user-type").text(userWord);
-  };
 });
 
 // CHECK THE USER'S ENTERED INPUT
@@ -138,13 +142,15 @@ function timer() {
   }, 1000);
 }
 
+
+
 // ONCE TIME'S UP, REMOVE KEY LISTENERS, SHOW PLAYER RESULTS,
 // PLAY SOUND, SHOW ALL POKEMON CAUGHT
 function gameover() {
 
-  $(document).off("keydown");
+  gameOver = true;
   $(".results-container").css("display", "inline-block");
-  $(".result-score").html("Congratulations, you caught " + score + " Pokemon!<br>")
+  $(".result-score").html("Congratulations! You caught " + score + " Pokemon!<br><br><br>")
   let audio = new Audio("/sounds/gameover.wav");
   audio.play();
 

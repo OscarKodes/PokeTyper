@@ -68,18 +68,21 @@ a:hover {
 .results-container {
   display: none;
   text-align: center;
+  position: absolute;
+  top: 4rem;
+  width: 100%;
 }
 
 .results {
   font-size: 2rem;
   color: white;
-  background-color: #3E83AC;
-  position: absolute;
-  top: 15rem;
-  right: 30rem;
-  height: 35rem;
-  border-radius: 50px;
-  padding: 4rem;
+  background-color: #ACCB95;
+  height: 45rem;
+  padding: 5rem;
+}
+
+.result-score {
+  padding: 4rem 0;
 }
 
 .footer {
