@@ -70,6 +70,82 @@ function newPokemon() {
   $(".sprite").attr("src", spriteURL);
 }
 
+let shiftOn = false;
+
+// CREATE LISTENER FOR MOBILE KEYBOARD
+$("body").on("click", function(event) {
+
+  let pressedKey = event.target.innerText;
+
+  console.log(pressedKey);
+
+
+  // CHECK IF GAME IS OVER OR NOT, OFF() DOESN'T SEEM TO TURN OFF LISTENERS
+  if (!gameOver) {
+
+    // IF THE TYPED KEY WAS A LETTER, RECORD IT
+    if (abc.includes(pressedKey)) {
+      if (shiftOn) {
+        pressedKey = pressedKey.toUpperCase();
+      }
+      userWord += pressedKey;
+      $(".user-type").text(userWord);
+      shiftOn = false;
+    }
+
+    // IF THE TYPED KEY WAS SHIFT, CAPITALIZE NEXT LETTER
+    else if (pressedKey === "Shift") {
+      if (shiftOn === false) {
+        shiftOn = true;
+      } else {
+        shiftOn = false;
+      }
+      console.log(shiftOn);
+    }
+
+    // IF ENTER, WE CHECK THE ENTIRE WORD
+    else if (pressedKey === "Enter") {
+      checkWord();
+      shiftOn = false;
+    }
+
+    // BACKSPACE FUNCTIONALITY
+    else if (pressedKey === "Backspace" || pressedKey === "Delete") {
+      userWord = userWord.slice(0, -1);
+      $(".user-type").text(userWord);
+      shiftOn = false;
+    };
+  }
+
+
+  //Update keyboard if shift on or OFF
+  if (shiftOn) {
+    $(".shift").css("background-color", "powderblue");
+
+    let allLetters = document.querySelectorAll(".keyboard-row .col-1");
+
+    for (let i = 0; i < allLetters.length; i++) {
+
+      let currButton = allLetters[i]
+      let bigLetter = currButton.innerText.toUpperCase();
+      currButton.innerHTML = bigLetter;
+    }
+  }
+
+  else if (!shiftOn){
+    $(".shift").css("background-color", "white");
+
+    let allLetters = document.querySelectorAll(".keyboard-row .col-1");
+
+    for (let i = 0; i < allLetters.length; i++) {
+
+      let currButton = allLetters[i]
+      let smallLetter = currButton.innerText.toLowerCase();
+      currButton.innerHTML = smallLetter;
+    }
+  }
+});
+
 // CREATE LISTENER FOR USER KEYBOARD INPUT
 $("body").on("keydown", function(event) {
   let pressedKey = event.key;
@@ -149,7 +225,8 @@ function timer() {
 function gameover() {
 
   gameOver = true;
-  $(".results-container").css("display", "inline-block");
+  $("#game-screen").css("display", "none");
+  $(".results-container").css("display", "block");
   $(".result-score").html("Congratulations!<br>You caught " + score + " Pokemon!<br><br>")
   let audio = new Audio("/sounds/gameover.wav");
   audio.play();
