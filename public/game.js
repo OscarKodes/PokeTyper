@@ -150,7 +150,7 @@ function gameover() {
 
   gameOver = true;
   $(".results-container").css("display", "inline-block");
-  $(".result-score").html("Congratulations! You caught " + score + " Pokemon!<br><br><br>")
+  $(".result-score").html("Congratulations!<br>You caught " + score + " Pokemon!<br><br>")
   let audio = new Audio("/sounds/gameover.wav");
   audio.play();
 

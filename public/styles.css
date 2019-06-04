@@ -4,7 +4,6 @@ body {
   font-weight: 400;
   font-size: 1.5rem;
   background-color: #ACCB95;
-
 }
 
 a {
@@ -20,7 +19,7 @@ a:hover {
 .brand {
   font-family: 'Montserrat Alternates', sans-serif;
   font-weight: 800;
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
 
 .navbar-color {
@@ -31,20 +30,27 @@ a:hover {
   text-align: right;
 }
 
+.btn-xl {
+  padding: 10px 20px;
+  font-size: 2rem;
+  border-radius: 10px;
+  width: 20rem;
+}
+
 .top-container {
   background-color: #ACCB95;
   text-align: center;
-  padding: 10rem 6rem 10rem 6rem;
+  padding: 10rem 6rem 12rem 6rem;
 }
 
 .big-text {
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
   font-size: 6rem;
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
 }
 
-.rules-container{
+.rules-container {
   background-color: white;
   color: #3E83AC;
   padding: 3rem;
@@ -77,12 +83,15 @@ a:hover {
   font-size: 2rem;
   color: white;
   background-color: #ACCB95;
-  height: 45rem;
+  height: 50rem;
   padding: 5rem;
 }
 
 .result-score {
   padding: 4rem 0;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1.25;
 }
 
 .footer {
@@ -93,7 +102,7 @@ a:hover {
 
 .user-input-box {
   text-align: center;
-  margin: 0 4rem 7rem;
+  margin: 0 4rem 14rem;
   padding: 2rem 0 7rem;
   background-color: white;
   height: 5rem;
@@ -107,7 +116,7 @@ a:hover {
 
 .game-counters {
   text-align: center;
-  padding: 6rem 3rem 3rem 3rem;
+  padding: 10rem 3rem 3rem 3rem;
 }
 
 .curr-pokemon {

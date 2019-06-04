@@ -1,44 +1,47 @@
 <%- include("partials/header") -%>
 
+  <!-- Text to show time left and user's score -->
+  <div class="game-counters row">
 
-<div class="game-counters row">
+    <div class="col-6">
+      <h1 class="score">Caught: </h1>
+    </div>
 
-  <div class="col-6">
-    <h1 class="score">Caught: </h1>
+    <div class="col-6">
+      <h1 class="timer">Time: </h1>
+    </div>
 
   </div>
-  <div class="col-6">
-    <h1 class="timer">Time: </h1>
 
-  </div>
-</div>
-
-<h4 class="curr-pokemon"></h4>
-<div class="sprite-container">
-  <img class="sprite" src="">
-</div>
-
-<div class="user-input-box">
-  <h1 class="user-type"></h1>
-
-</div>
-
-<div class="results-container">
-  <div class="results">
-    <p class="result-score"></p>
-    <button class="btn btn-dark btn-large" type="button">
-      <a href="/">Restart</a>
-    </button>
+  <!-- Current Pokemon's name and sprite -->
+  <h4 class="curr-pokemon"></h4>
+  <div class="sprite-container">
+    <img class="sprite" src="">
   </div>
 
-</div>
+  <!-- User's Text input box -->
+  <div class="user-input-box">
+    <h1 class="user-type"></h1>
+  </div>
+
+
+  <!-- Hidden User's Results, appears when time is up -->
+  <div class="results-container">
+    <div class="results">
+      <p class="result-score"></p>
+
+      <!-- Buttons for the user to navigate once game is over -->
+      <a href="/" class="btn btn-secondary btn-xl" role="button">Home</a>
+      <a href="/gameplay" class="btn btn-secondary btn-xl" role="button">Restart</a>
+
+    </div>
+  </div>
+
 
   <!-- jQuery Scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
   <!-- Game Javascript Scripts -->
   <script src="game.js" charset="utf-8"></script>
 
-
-  <%- include("partials/footer") -%>
+<%- include("partials/footer") -%>
