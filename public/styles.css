@@ -122,6 +122,12 @@ body {
   color: black;
 }
 
+.score, .timer {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: 900;
+  font-size: 3rem;
+}
+
 .curr-pokemon {
   text-align: center;
   font-size: 5rem;
@@ -165,16 +171,17 @@ body {
 @media (max-width: 1080px) {
   .user-input-box {
     margin: 1rem 1rem 0;
-    padding: 3rem 1rem 6rem;
+    padding: 2rem 1rem 7rem;
     height: 3rem;
     border-radius: 15px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
-    border-bottom: 2px dashed grey;
+    border-bottom: 2px dashed #ACCB95;
+    opacity: 0.8;
   }
 
   .user-type {
-    font-size: 3rem;
+    font-size: 5rem;
     color: black;
   }
 }
@@ -190,28 +197,38 @@ body {
     line-height: 2;
     background-color: white;
     color: black;
-    padding: 0 1rem;
+    padding: 0 0.9rem;
     margin: 0 1rem;
     border-radius: 15px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
+    opacity: 0.8;
   }
 
   .keyboard-row {
-    border-bottom: 2px dashed grey;
+    border-bottom: 2px dashed #ACCB95;
     height: 4.5rem;
   }
 
   .keyboard-row .col-1:hover, .keyboard-row .col-2:hover, .keyboard-last-row .col-6:hover {
     background-color: powderblue;
+    border-style: solid powderblue 5px;
   }
 
   .keyboard-row .col-1, .shift {
-    border-right: 2px dashed grey;
+    border-right: 2px dashed #ACCB95;
+  }
+
+  .shift:hover {
+    border-bottom-left-radius: 15px;
+  }
+
+  .enter:hover {
+    border-bottom-right-radius: 15px;
   }
 
   .z {
-    border-left: 2px dashed grey;
+    border-left: 2px dashed #ACCB95;
   }
 
   .blank-key:hover {
