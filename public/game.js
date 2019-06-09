@@ -1,4 +1,4 @@
-// ARRAY OF POKEMON FROM GITHUB
+// ARRAY OF POKEMON FROM GITHUB =================================
 const pokemon = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle",
   "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Weedle", "Kakuna", "Beedrill", "Pidgey",
   "Pidgeotto", "Pidgeot", "Rattata", "Raticate", "Spearow", "Fearow", "Ekans", "Arbok", "Pikachu", "Raichu",
@@ -17,17 +17,34 @@ const pokemon = ["Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon",
   "Dragonair", "Dragonite", "Mewtwo", "Mew"
 ];
 
-// DECLARE GLOBAL VARIABLES HERE
+
+// DECLARE GLOBAL VARIABLES HERE =================================
 let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   abc += abc.toLowerCase();
 let seconds = 60;
 let score = 0;
 let pokemonCaught = [];
+let shiftOn = false;
 let gameOver = false;
-let currPokemon, userWord, spriteURL, pokeNationalDexId;
+let currPokemon, userWord, spriteURL, pokeNationalDexId, muted;
 
 
-// GENERATES A NEW POKEMON
+// STARTS THE BACKGROUND MUSIC - Adjusts muted audio accordingly
+let battleMusic = new Audio ("/sounds/battle.mp3");
+
+battleMusic.play();
+battleMusic.muted = true;
+muted = true;
+
+$(".audio-control").on("click", function(){
+  $(".audio-control").toggleClass("fa-volume-mute");
+  $(".audio-control").toggleClass("fa-volume-up");
+  muted = !muted;
+  battleMusic.muted = !battleMusic.muted;
+});
+
+
+// GENERATES A NEW POKEMON =================================
 function newPokemon() {
 
   // UPDATE SCORE TEXT
@@ -64,63 +81,69 @@ function newPokemon() {
     pokeUrlName = currPokemon.toLowerCase();
   }
 
-  spriteURL = "https://projectpokemon.org/images/normal-sprite/" + pokeUrlName + ".gif";
+  spriteURL = "/sprites/" + pokeUrlName + ".gif";
 
   // UPDATE THE POKEMON SPRITE
   $(".sprite").attr("src", spriteURL);
 }
 
-let shiftOn = false;
 
-// CREATE LISTENER FOR MOBILE KEYBOARD
+
+// CREATE LISTENER FOR MOBILE KEYBOARD ===================================
 $("body").on("click", function(event) {
 
-  let pressedKey = event.target.innerText;
-
-  console.log(pressedKey);
-
+  let key = event.target.innerText
 
   // CHECK IF GAME IS OVER OR NOT, OFF() DOESN'T SEEM TO TURN OFF LISTENERS
   if (!gameOver) {
+    keyCheck(key);
+  };
+});
 
-    // IF THE TYPED KEY WAS A LETTER, RECORD IT
-    if (abc.includes(pressedKey)) {
-      if (shiftOn) {
-        pressedKey = pressedKey.toUpperCase();
-      }
-      userWord += pressedKey;
-      $(".user-type").text(userWord);
-      shiftOn = false;
-    }
+// CREATE LISTENER FOR USER KEYBOARD INPUT =================================
+$("body").on("keydown", function(event) {
 
-    // IF THE TYPED KEY WAS SHIFT, CAPITALIZE NEXT LETTER
-    else if (pressedKey === "Shift") {
-      if (shiftOn === false) {
-        shiftOn = true;
-      } else {
-        shiftOn = false;
-      }
-      console.log(shiftOn);
-    }
+  // CHECK IF GAME IS OVER OR NOT, OFF() DOESN'T SEEM TO TURN OFF LISTENERS
+  if (!gameOver) {
+    keyCheck(event.key);
+  }
+});
 
-    // IF ENTER, WE CHECK THE ENTIRE WORD
-    else if (pressedKey === "Enter") {
-      checkWord();
-      shiftOn = false;
-    }
+// FUNCTIONALITY FOR BOTH KEYBOARD INPUTS ==================================
+function keyCheck(key) {
 
-    // BACKSPACE FUNCTIONALITY
-    else if (pressedKey === "Backspace" || pressedKey === "Delete") {
-      userWord = userWord.slice(0, -1);
-      $(".user-type").text(userWord);
-      shiftOn = false;
-    };
+  // IF THE TYPED KEY WAS A LETTER, RECORD IT
+  if (abc.includes(key)) {
+    userWord += key;
+    $(".user-type").text(userWord);
+    shiftOn = false;
   }
 
+  // IF THE TYPED KEY WAS SHIFT, Toggle boolean shiftOn
+  else if (key === "Shift") {
+    if (shiftOn) {
+      shiftOn = false;
+    } else {
+      shiftOn = true;
+    }
+  }
+
+  // IF ENTER, WE CHECK THE ENTIRE WORD
+  else if (key === "Enter") {
+    checkWord();
+    shiftOn = false;
+  }
+
+  // BACKSPACE FUNCTIONALITY
+  else if (key === "Back" || key === "Backspace" || key === "Delete") {
+    userWord = userWord.slice(0, -1);
+    $(".user-type").text(userWord);
+    shiftOn = false;
+  };
 
   //Update keyboard if shift on or OFF
   if (shiftOn) {
-    $(".shift").css("background-color", "powderblue");
+    $(".shift").addClass(".shift-on");
 
     let allLetters = document.querySelectorAll(".keyboard-row .col-1");
 
@@ -132,8 +155,8 @@ $("body").on("click", function(event) {
     }
   }
 
-  else if (!shiftOn){
-    $(".shift").css("background-color", "white");
+  else {
+    $(".shift").removeClass(".shift-on");
 
     let allLetters = document.querySelectorAll(".keyboard-row .col-1");
 
@@ -144,35 +167,9 @@ $("body").on("click", function(event) {
       currButton.innerHTML = smallLetter;
     }
   }
-});
+}
 
-// CREATE LISTENER FOR USER KEYBOARD INPUT
-$("body").on("keydown", function(event) {
-  let pressedKey = event.key;
-
-  // CHECK IF GAME IS OVER OR NOT, OFF() DOESN'T SEEM TO TURN OFF LISTENERS
-  if (!gameOver) {
-
-    // IF THE TYPED KEY WAS A LETTER, RECORD IT
-    if (abc.includes(pressedKey)) {
-      userWord += pressedKey;
-      $(".user-type").text(userWord);
-    }
-
-    // IF ENTER, WE CHECK THE ENTIRE WORD
-    else if (pressedKey === "Enter") {
-      checkWord();
-    }
-
-    // BACKSPACE FUNCTIONALITY
-    else if (pressedKey === "Backspace" || pressedKey === "Delete") {
-      userWord = userWord.slice(0, -1);
-      $(".user-type").text(userWord);
-    };
-  }
-});
-
-// CHECK THE USER'S ENTERED INPUT
+// CHECK THE USER'S ENTERED INPUT =================================
 function checkWord() {
 
   // IF CORRECT MATCH, UPDATE SCORE, POKEMON CAUGHT
@@ -180,27 +177,33 @@ function checkWord() {
   if (userWord === currPokemon) {
     score++;
     pokemonCaught.push(spriteURL);
-    cry();
+    if (!muted) {
+      cry();
+    }
     newPokemon();
   }
 
   // IF INCORRECT, PLAY AUDIO, CLEAR USER CACHE, UPDATE USER TEXT ON SCREEN
   else {
-    let audio = new Audio ("/sounds/wrong.mp3");
-    audio.play();
+
+    if (!muted){
+      let audio = new Audio ("/sounds/wrong.mp3");
+      audio.play();
+    }
+
     userWord = "";
     $(".user-type").text(userWord);
   }
 }
 
-// PLAYS CURRENT POKEMON'S CRY AUDIO
+// PLAYS CURRENT POKEMON'S CRY AUDIO =================================
 function cry() {
 
   let audio = new Audio("/sounds/" + pokeNationalDexId + " - " + currPokemon + ".wav");
   audio.play();
 }
 
-// KEEPS TRACK OF THE TIME
+// KEEPS TRACK OF THE TIME =================================
 function timer() {
 
   // UPDATE SECONDS TEXT FOR USER TO SEE
@@ -219,20 +222,25 @@ function timer() {
 }
 
 
-
-// ONCE TIME'S UP, REMOVE KEY LISTENERS, SHOW PLAYER RESULTS,
-// PLAY SOUND, SHOW ALL POKEMON CAUGHT
+// ONCE TIME'S UP, REMOVE KEY LISTENERS, SHOW PLAYER RESULTS, =================================
+// PLAY SOUND, SHOW ALL POKEMON CAUGHT ========================================================
 function gameover() {
 
   gameOver = true;
+
   $("#game-screen").css("display", "none");
   $(".results-container").css("display", "block");
-  $(".result-score").html("Congratulations!<br>You caught " + score + " Pokemon!<br><br>")
-  let audio = new Audio("/sounds/gameover.wav");
-  audio.play();
+  $(".result-score").html("Congratulations!<br>You caught " + score + " Pokemon!<br><br>");
 
-  pokemonCaught.forEach(function(pokemonSpriteURL) {
-    $(".result-score").append("<img src='" + pokemonSpriteURL + "'>");
+  battleMusic.pause();
+
+  if (!muted) {
+    let audio = new Audio("/sounds/gameover.wav");
+    audio.play();
+  }
+
+  pokemonCaught.forEach(function(spriteURL) {
+    $(".result-score").append("<img src='" + spriteURL + "'>");
   });
 }
 

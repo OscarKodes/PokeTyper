@@ -1,4 +1,4 @@
-/* General Element Selector Tags */
+/* Element Selector Tags */
 body {
   color: white;
   font-family: 'Montserrat', sans-serif;
@@ -6,7 +6,7 @@ body {
   background-color: #ACCB95;
 }
 
-/* General Bootstrap Class Selectors Modifications*/
+/* Bootstrap Class Selector Modifications*/
 .btn-xl {
   padding: 10px 20px;
   font-size: 2rem;
@@ -25,7 +25,7 @@ body {
 }
 
 
-/* header.ejs Navigation Bar Class Selectors */
+/* Navigation Bar Selectors - header.ejs */
 .brand {
   font-family: 'Montserrat Alternates', sans-serif;
   font-weight: 800;
@@ -60,7 +60,7 @@ body {
   }
 }
 
-/* home.ejs Class Selectors */
+/* Title Selectors - home.ejs*/
 .top-container {
   text-align: center;
   padding: 10rem 0 12rem;
@@ -79,6 +79,7 @@ body {
   }
 }
 
+/* Rules Container Selectors - home.ejs */
 .rules-container {
   background-color: white;
   color: #3E83AC;
@@ -115,7 +116,11 @@ body {
   }
 }
 
-/* gameplay.ejs Class Selectors */
+/* Game Interface Selectors - gameplay.ejs*/
+.audio-control {
+
+}
+
 .game-counters {
   text-align: center;
   padding: 10rem 3rem 3rem 3rem;
@@ -154,6 +159,7 @@ body {
   display: inline-block;
 }
 
+/* User Typing Selectors - gameplay.ejs*/
 .user-input-box {
   text-align: center;
   margin: 0 4rem 14rem;
@@ -186,6 +192,7 @@ body {
   }
 }
 
+/* Keyboard Selectors - gameplay.ejs*/
 .keyboard {
   display: none;
 }
@@ -198,7 +205,7 @@ body {
     background-color: white;
     color: black;
     padding: 0 0.9rem;
-    margin: 0 1rem;
+    margin: 0 1rem 15rem;
     border-radius: 15px;
     border-top-right-radius: 0;
     border-top-left-radius: 0;
@@ -210,7 +217,7 @@ body {
     height: 4.5rem;
   }
 
-  .keyboard-row .col-1:hover, .keyboard-row .col-2:hover, .keyboard-last-row .col-6:hover {
+  .keyboard-row .col-1:hover, .keyboard-row .col-2:hover, .keyboard-last-row .col-6:hover, .shift-on {
     background-color: powderblue;
     border-style: solid powderblue 5px;
   }
@@ -236,18 +243,20 @@ body {
   }
 }
 
+/* Results Game Over Screen - gameplay.ejs  */
 .results-container {
   display: none;
   text-align: center;
   width: 100%;
   background-color: #ACCB95;
   padding-bottom: 5rem;
+  margin-bottom: 5rem;
 }
 
 .results {
   font-size: 2rem;
   color: white;
-  height: 50rem;
+  height: 80%;
   padding: 5rem;
 }
 
@@ -258,17 +267,52 @@ body {
   line-height: 1.25;
 }
 
+/* About Page */
+.about-top {
+  text-align: center;
+  padding: 9rem 0 2rem;
+  color: #3E83AC;
+  background-color: white;
+}
+
+.about-top h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 5rem;
+}
+
+.about-text-container {
+  display: inline-block;
+  color: #3E83AC;
+  background-color: white;
+  padding: 2rem 20% 16rem;
+  line-height: 2;
+  text-align: justify;
+}
+
+@media (max-width: 1080px) {
+  .about-top h1 {
+    font-size: 5rem;
+  }
+
+  .about-text-container {
+    font-size: 1.65rem;
+    padding: 2rem 18% 16rem;
+
+  }
+}
+
 /* footer.ejs Class Selectors */
 .footer {
   background-color: #8E9E69;
   padding: 8rem 0 4.5rem;
   text-align: center;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 @media (max-width: 1080px) {
   .footer {
-    background-color: #ACCB95;
+    background-color: #8E9E69;
   }
 }
 
