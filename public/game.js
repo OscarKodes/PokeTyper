@@ -101,7 +101,7 @@ $("body").on("click", function(event) {
 });
 
 // THIS PREVENTS ACCIDENTAL ZOOMING =============================
-$("body").bind('touchend', function(event) {
+$(".keyboard").bind('touchend', function(event) {
   e.preventDefault();
   // Add your code here.
   $(this).click();
