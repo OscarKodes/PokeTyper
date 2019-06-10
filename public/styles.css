@@ -226,7 +226,7 @@ body {
     height: 8rem;
   }
 
-  .keyboard-row .col-1:hover, .keyboard-row .col-2:hover, .keyboard-last-row .col-6:hover, .shift-on {
+  .keyboard-row .col-1:active, .keyboard-row .col-2:active, .keyboard-last-row .col-6:active, .shift-on, .keyboard-row .col-3:active {
     background-color: powderblue;
     border-style: solid powderblue 5px;
   }
