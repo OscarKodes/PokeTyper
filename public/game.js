@@ -100,6 +100,14 @@ $("body").on("click", function(event) {
   };
 });
 
+// THIS PREVENTS ACCIDENTAL ZOOMING =============================
+$("body").bind('touchend', function(event) {
+  e.preventDefault();
+  // Add your code here.
+  $(this).click();
+  // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
+});
+
 // CREATE LISTENER FOR USER KEYBOARD INPUT =================================
 $("body").on("keydown", function(event) {
 
