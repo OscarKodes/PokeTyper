@@ -79,9 +79,10 @@ function newPokemon() {
   $(".sprite").attr("src", spriteURL);
 }
 
-// POSITIONS SCREEN PERFECTLY FOR MOBILE USERS
+// STOPS MOBILE SCROLLING PERFECTLY FOR MOBILE USERS
 $("input[type='text']").on("focus", function () {
-  window.scrollTo(0, 125);
+  window.scrollTo(0, 0);
+  document.body.scrollTop = 0;
 });
 
 // CREATE LISTENER FOR USER'S INPUT
