@@ -24,7 +24,6 @@ let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let seconds = 60;
 let score = 0;
 let pokemonCaught = [];
-let shiftOn = false;
 let gameOver = false;
 let currPokemon, userWord, spriteURL, pokeNationalDexId, muted;
 
@@ -49,10 +48,6 @@ function newPokemon() {
 
   // UPDATE SCORE TEXT
   $(".score").text("Caught: " + score);
-
-  // CLEAR USER'S TYPED INPUT
-  userWord = "";
-  $(".user-type").text(userWord);
 
   // SELECT NEW POKEMON WITH RANDOM NUMBER
   let randomNum = Math.floor(Math.random() * 151);
@@ -89,94 +84,6 @@ function newPokemon() {
 
 
 
-// CREATE LISTENER FOR MOBILE KEYBOARD ===================================
-$("body").on("click", function(event) {
-
-  let key = event.target.innerText
-
-  // CHECK IF GAME IS OVER OR NOT, OFF() DOESN'T SEEM TO TURN OFF LISTENERS
-  if (!gameOver) {
-    keyCheck(key);
-  };
-});
-
-// THIS PREVENTS ACCIDENTAL ZOOMING =============================
-$(".keyboard").bind('touchend', function(event) {
-  e.preventDefault();
-  // Add your code here.
-  $(this).click();
-  // This line still calls the standard click event, in case the user needs to interact with the element that is being clicked on, but still avoids zooming in cases of double clicking.
-});
-
-// CREATE LISTENER FOR USER KEYBOARD INPUT =================================
-$("body").on("keydown", function(event) {
-
-  // CHECK IF GAME IS OVER OR NOT, OFF() DOESN'T SEEM TO TURN OFF LISTENERS
-  if (!gameOver) {
-    keyCheck(event.key);
-  }
-});
-
-// FUNCTIONALITY FOR BOTH KEYBOARD INPUTS ==================================
-function keyCheck(key) {
-
-  // IF THE TYPED KEY WAS A LETTER, RECORD IT
-  if (abc.includes(key)) {
-    userWord += key;
-    $(".user-type").text(userWord);
-    shiftOn = false;
-  }
-
-  // IF THE TYPED KEY WAS SHIFT, Toggle boolean shiftOn
-  else if (key === "Shift") {
-    if (shiftOn) {
-      shiftOn = false;
-    } else {
-      shiftOn = true;
-    }
-  }
-
-  // IF ENTER, WE CHECK THE ENTIRE WORD
-  else if (key === "Enter") {
-    checkWord();
-    shiftOn = false;
-  }
-
-  // BACKSPACE FUNCTIONALITY
-  else if (key === "Back" || key === "Backspace" || key === "Delete") {
-    userWord = userWord.slice(0, -1);
-    $(".user-type").text(userWord);
-    shiftOn = false;
-  };
-
-  //Update keyboard if shift on or OFF
-  if (shiftOn) {
-    $(".shift").addClass(".shift-on");
-
-    let allLetters = document.querySelectorAll(".keyboard-row .col-1");
-
-    for (let i = 0; i < allLetters.length; i++) {
-
-      let currButton = allLetters[i]
-      let bigLetter = currButton.innerText.toUpperCase();
-      currButton.innerHTML = bigLetter;
-    }
-  }
-
-  else {
-    $(".shift").removeClass(".shift-on");
-
-    let allLetters = document.querySelectorAll(".keyboard-row .col-1");
-
-    for (let i = 0; i < allLetters.length; i++) {
-
-      let currButton = allLetters[i]
-      let smallLetter = currButton.innerText.toLowerCase();
-      currButton.innerHTML = smallLetter;
-    }
-  }
-}
-
 // CHECK THE USER'S ENTERED INPUT =================================
 function checkWord() {
 
@@ -198,9 +105,6 @@ function checkWord() {
       let audio = new Audio ("/sounds/wrong.mp3");
       audio.play();
     }
-
-    userWord = "";
-    $(".user-type").text(userWord);
   }
 }
 
