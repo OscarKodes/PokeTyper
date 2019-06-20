@@ -139,6 +139,16 @@ body {
   color: black;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
 .sprite-container {
   width: 200px;
   height: 200px;
@@ -159,90 +169,30 @@ body {
   display: inline-block;
 }
 
-/* User Typing Selectors - gameplay.ejs*/
-.user-input-box {
-  text-align: center;
-  margin: 0 4rem 14rem;
-  padding: 2rem 0 7rem;
-  background-color: white;
-  height: 5rem;
-  border-radius: 100px;
+/* Input Text Selectors - gameplay.ejs*/
+.container.user-type {
+  margin: 1rem auto 8rem;
 }
 
 .user-type {
-  font-size: 5rem;
-  color: black;
+  width: 100%;
+  height: 12rem;
+  border-width: 0;
+  border-radius: 120px;
+  text-align: center;
+  font-size: 6rem;
 }
 
 @media (max-width: 1080px) {
-  .user-input-box {
-    margin: 0;
-    padding: 2rem 1rem 7rem;
-    height: 3rem;
-    border-radius: 0;
-    border-bottom: 2px dashed #ACCB95;
-    opacity: 0.8;
-  }
-
-  .user-type {
-    font-size: 5rem;
-    color: black;
+  .container.user-type  {
+    padding-bottom: 25rem;
   }
 }
 
-/* Keyboard Selectors - gameplay.ejs*/
-.keyboard {
-  display: none;
+input:focus {
+  outline: none;
 }
 
-@media (max-width: 1080px) {
-  .keyboard {
-    display: block;
-    text-align: center;
-    line-height: 2;
-    background-color: white;
-    color: black;
-    padding: 0 0.9rem;
-    margin: 0 0 15rem;
-    opacity: 0.8;
-    font-size: 3rem;
-
-    /* Prevents accident selecting */
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome and Opera */
-  }
-
-  .keyboard-row {
-    border-bottom: 2px dashed #ACCB95;
-    height: 8rem;
-  }
-
-  .keyboard-last-row {
-    height: 8rem;
-  }
-
-  .keyboard-row .col-1:active, .keyboard-row .col-2:active, .keyboard-last-row .col-6:active, .shift-on, .keyboard-row .col-3:active {
-    background-color: powderblue;
-    border-style: solid powderblue 5px;
-  }
-
-  .keyboard-row .col-1, .shift {
-    border-right: 2px dashed #ACCB95;
-  }
-
-  .z {
-    border-left: 2px dashed #ACCB95;
-  }
-
-  .blank-key:hover {
-    background-color: white!important;
-  }
-}
 
 /* Results Game Over Screen - gameplay.ejs  */
 .results-container {

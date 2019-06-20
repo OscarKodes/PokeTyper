@@ -24,16 +24,13 @@ let abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let seconds = 60;
 let score = 0;
 let pokemonCaught = [];
-let gameOver = false;
-let currPokemon, userWord, spriteURL, pokeNationalDexId, muted;
+let currPokemon, spriteURL, pokeNationalDexId, muted;
 
 
 // STARTS THE BACKGROUND MUSIC - Adjusts muted audio accordingly
 let battleMusic = new Audio ("/sounds/battle.mp3");
 
 battleMusic.play();
-battleMusic.muted = true;
-muted = true;
 
 $(".audio-control").on("click", function(){
   $(".audio-control").toggleClass("fa-volume-mute");
@@ -82,10 +79,27 @@ function newPokemon() {
   $(".sprite").attr("src", spriteURL);
 }
 
+// CREATE LISTENER FOR USER'S INPUT
+$("input[type='text']").on("keydown", function(event){
 
+  if (event.key === "Enter") {
+
+    // grabs user's input and records it
+    let userWord = $(this).val();
+
+    // reset user's input
+    $(this).val("");
+
+    // Gets rid of placeholder Text
+    $(this).attr("placeholder", "");
+
+    // checks user's input
+    checkWord(userWord);
+  }
+});
 
 // CHECK THE USER'S ENTERED INPUT =================================
-function checkWord() {
+function checkWord(userWord) {
 
   // IF CORRECT MATCH, UPDATE SCORE, POKEMON CAUGHT
   // PLAY CRY, AND GENERATE NEW POKEMON
@@ -95,6 +109,7 @@ function checkWord() {
     if (!muted) {
       cry();
     }
+
     newPokemon();
   }
 
@@ -138,9 +153,7 @@ function timer() {
 // PLAY SOUND, SHOW ALL POKEMON CAUGHT ========================================================
 function gameover() {
 
-  gameOver = true;
-
-  $("#game-screen").css("display", "none");
+  $("#game-screen").remove();
   $(".results-container").css("display", "block");
   $(".result-score").html("Congratulations!<br>You caught " + score + " Pokemon!<br><br>");
 
