@@ -143,9 +143,9 @@ body {
 
 @media (max-width: 1080px) {
   .game-counters {
-    padding: 0 0 15rem 0;
+    padding: 0 0 35rem 0;
     position: relative;
-    bottom: 14rem;
+    bottom: 1rem;
   }
 }
 
