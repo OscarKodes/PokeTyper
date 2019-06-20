@@ -159,7 +159,8 @@ function timer() {
 // PLAY SOUND, SHOW ALL POKEMON CAUGHT ========================================================
 function gameover() {
 
-  $("#game-screen").remove();
+  $("#game-screen-mobile").remove();
+  $("#game-screen-desktop").remove();
   $(".results-container").css("display", "block");
   $(".result-score").html("Congratulations!<br>You caught " + score + " Pokemon!<br><br>");
 

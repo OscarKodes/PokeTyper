@@ -1,8 +1,11 @@
 <%- include("partials/header") -%>
 
 
+<!-- ==========================================================-->
+<!-- HTML FOR DESKTOP =========================================-->
+
   <!-- A section with an Id for linking with # -->
-  <section id="game-screen">
+  <section id="game-screen-desktop" class="desktop ">
 
     <!-- Text to show time left and user's score -->
     <div class="game-counters row">
@@ -33,6 +36,53 @@
       <input class="user-type" type="text" placeholder="Type Here">
     </div>
 
+
+  </section>
+
+
+<!--=================================================== -->
+<!-- HTML FOR MOBILE ================================== -->
+  <!-- A section with an Id for linking with # -->
+  <section id="game-screen-mobile" class="mobile">
+
+    <!-- Current Pokemon's name and sprite -->
+    <div class="row align-items-end">
+
+      <div class="col-7">
+        <h4 class="curr-pokemon noselect"></h4>
+      </div>
+
+      <div class="col-5">
+        <div class="sprite-container">
+          <img class="sprite" src="">
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- user input -->
+    <div class="container user-type">
+      <input class="user-type" type="text" placeholder="Type Here">
+    </div>
+
+    <!-- Text to show time left and user's score -->
+    <div class="game-counters row">
+
+      <div class="col-4">
+        <h1 class="score">Caught: </h1>
+      </div>
+
+      <div class="col-4">
+        <!-- Audio Controls -->
+        <i class="audio-control fas fa-volume-up fa-2x"></i>
+      </div>
+
+      <div class="col-4">
+        <h1 class="timer">Time: </h1>
+      </div>
+
+    </div>
 
   </section>
 

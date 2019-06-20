@@ -117,14 +117,36 @@ body {
 }
 
 /* Game Interface Selectors - gameplay.ejs*/
-.audio-control {
+.mobile {
+  display: none;
+}
 
+@media (max-width: 1080px) {
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: block;
+  }
+
+  .mobile .row {
+    margin-top: 4rem;
+  }
 }
 
 .game-counters {
   text-align: center;
   padding: 10rem 3rem 3rem 3rem;
   color: black;
+}
+
+@media (max-width: 1080px) {
+  .game-counters {
+    padding: 0 0 15rem 0;
+    position: relative;
+    bottom: 3rem;
+  }
 }
 
 .score, .timer {
@@ -158,10 +180,22 @@ body {
 }
 
 @media (max-width: 1080px) {
+  .curr-pokemon {
+    text-align: right;
+  }
+
   .sprite-container {
-    height: 160px;
-    padding-top: 0;
-    margin-top: 1.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sprite {
+    margin-left: 2rem;
+    padding-bottom: 1.5rem;
+    max-width: 200px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 }
 
@@ -176,16 +210,20 @@ body {
 
 .user-type {
   width: 100%;
-  height: 12rem;
+  height: 8rem;
   border-width: 0;
   border-radius: 120px;
   text-align: center;
-  font-size: 6rem;
+  font-size: 4.5rem;
 }
 
 @media (max-width: 1080px) {
-  .container.user-type  {
-    padding-bottom: 25rem;
+  .container.user-type {
+    margin: 3rem auto 10rem auto;
+  }
+
+  .user-type {
+    margin-top: 1.5rem;
   }
 }
 
