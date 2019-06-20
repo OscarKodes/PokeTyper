@@ -79,6 +79,12 @@ function newPokemon() {
   $(".sprite").attr("src", spriteURL);
 }
 
+// PREVENT SCROLLING WHEN MOBILE USER IS TYPING
+$("this").on("focus", function () {
+  window.scrollTo(0, 0);
+  document.body.scrollTop = 0;
+});
+
 // CREATE LISTENER FOR USER'S INPUT
 $("input[type='text']").on("keydown", function(event){
 
